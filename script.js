@@ -1,37 +1,47 @@
-const API = "http://localhost:3000/api/settings";
+const API = "https://streak-bot-9vnn.onrender.com/api/settings";
 
-// Load saved settings when page opens
+// Load settings from server
 async function loadSettings() {
-  const res = await fetch(API);
-  const data = await res.json();
+  try {
+    const res = await fetch(API);
+    const data = await res.json();
 
-  if (data.prefix) {
-    document.querySelectorAll("input")[1].value = data.prefix;
-  }
+    const inputs = document.querySelectorAll("input");
 
-  if (data.botName) {
-    document.querySelectorAll("input")[0].value = data.botName;
+    if (data.botName) inputs[0].value = data.botName;
+    if (data.prefix) inputs[1].value = data.prefix;
+
+  } catch (err) {
+    console.log("Failed to load settings:", err);
   }
 }
 
-// Save settings
+// Save settings to server
 async function saveSettings() {
-  const botName = document.querySelectorAll("input")[0].value;
-  const prefix = document.querySelectorAll("input")[1].value;
+  const inputs = document.querySelectorAll("input");
 
-  await fetch(API, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      botName,
-      prefix
-    })
-  });
+  const botName = inputs[0].value;
+  const prefix = inputs[1].value;
 
-  alert("Saved to server!");
+  try {
+    await fetch(API, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        botName,
+        prefix
+      })
+    });
+
+    alert("Saved to server!");
+  } catch (err) {
+    alert("Failed to save settings");
+    console.log(err);
+  }
 }
 
-// Hook button
-document.querySelector("button").onclick = saveSettings;
-
-loadSettings();
+// Attach button safely
+window.addEventListener("DOMContentLoaded", () => {
+  document.querySelector("button").addEventListener("click", saveSettings);
+  loadSettings();
+});
