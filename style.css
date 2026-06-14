@@ -1,1 +1,362 @@
+* {
+  box-sizing: border-box;
+}
 
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  color: #f8eaff;
+  background: #050008;
+  font-family: Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
+}
+
+.page-glow {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background:
+    radial-gradient(circle at 45% 10%, rgba(185, 64, 255, 0.22), transparent 30%),
+    radial-gradient(circle at 85% 80%, rgba(255, 64, 230, 0.12), transparent 25%),
+    linear-gradient(120deg, #050008, #100018, #050008);
+  background-size: 280% 280%;
+  animation: pageFlow 12s ease infinite;
+}
+
+@keyframes pageFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.sidebar {
+  width: 275px;
+  min-height: 100vh;
+  background: rgba(18, 24, 31, 0.82);
+  border-right: 1px solid rgba(191, 79, 255, 0.35);
+  padding: 18px 12px;
+  overflow-y: auto;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 6px 10px 22px;
+}
+
+.brand-logo {
+  width: 54px;
+  height: 54px;
+  object-fit: contain;
+  animation: floatLogo 4s ease-in-out infinite;
+  filter: drop-shadow(0 0 18px #d45cff);
+}
+
+@keyframes floatLogo {
+  0%, 100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.brand h1 {
+  margin: 0;
+  font-size: 18px;
+  letter-spacing: 6px;
+  color: white;
+}
+
+.brand p {
+  margin: 4px 0 0;
+  color: #caa0de;
+  font-size: 13px;
+}
+
+.nav h4 {
+  margin: 20px 14px 8px;
+  color: #e078ff;
+  font-size: 12px;
+  letter-spacing: 0.8px;
+}
+
+.nav a {
+  display: block;
+  padding: 12px 14px;
+  color: #f4e6ff;
+  text-decoration: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.nav a:hover,
+.nav a.active {
+  background: rgba(197, 85, 255, 0.18);
+  color: white;
+  box-shadow: inset 4px 0 #d45cff;
+}
+
+.dashboard {
+  flex: 1;
+  min-width: 0;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(151, 52, 255, 0.14), transparent 35%),
+    rgba(10, 12, 16, 0.35);
+}
+
+.topbar {
+  min-height: 78px;
+  border-bottom: 1px solid rgba(191, 79, 255, 0.3);
+  background: rgba(7, 4, 11, 0.62);
+  padding: 14px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.left,
+.right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.menu-btn {
+  display: none;
+}
+
+.topbar h2 {
+  margin: 0;
+  font-size: 26px;
+  color: white;
+  text-shadow: 0 0 18px rgba(219, 103, 255, 0.9);
+}
+
+.topbar p {
+  margin: 4px 0 0;
+  color: #bfa3cf;
+}
+
+button {
+  border: none;
+  border-radius: 7px;
+  color: white;
+  background: linear-gradient(135deg, #8e2cff, #e66fff);
+  padding: 11px 16px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 0 20px rgba(197, 85, 255, 0.35);
+}
+
+.server-select,
+.discord-btn {
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(214, 92, 255, 0.35);
+}
+
+.notice {
+  margin: 22px 24px 0;
+  padding: 13px 16px;
+  border-radius: 7px;
+  background: linear-gradient(90deg, rgba(119, 55, 255, 0.85), rgba(204, 67, 255, 0.72));
+  color: white;
+  box-shadow: 0 0 25px rgba(177, 71, 255, 0.3);
+}
+
+.notice span {
+  font-weight: bold;
+  margin-right: 8px;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  gap: 24px;
+  padding: 24px;
+}
+
+.panel,
+.module-card {
+  position: relative;
+  background: rgba(19, 25, 32, 0.78);
+  border: 1px solid rgba(214, 92, 255, 0.25);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 0 24px rgba(138, 40, 255, 0.12);
+}
+
+.panel::before,
+.module-card::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  z-index: -1;
+  background: linear-gradient(
+    120deg,
+    rgba(142, 44, 255, 0.15),
+    rgba(239, 112, 255, 0.8),
+    rgba(142, 44, 255, 0.15)
+  );
+  background-size: 250% 250%;
+  animation: borderFlow 7s linear infinite;
+}
+
+@keyframes borderFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  100% {
+    background-position: 250% 50%;
+  }
+}
+
+.panel-title {
+  padding: 15px 18px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.035);
+  font-weight: bold;
+}
+
+.setting-block {
+  padding: 20px 18px;
+}
+
+.setting-block h3,
+.actions-panel h3 {
+  margin: 0 0 8px;
+  color: white;
+  font-size: 25px;
+  text-shadow: 0 0 16px rgba(219, 103, 255, 0.55);
+}
+
+.setting-block p {
+  margin: 0 0 14px;
+  color: #d7c3e4;
+}
+
+.input-row {
+  display: flex;
+}
+
+.input-row input {
+  flex: 1;
+  border-radius: 7px 0 0 7px;
+}
+
+.input-row button {
+  border-radius: 0 7px 7px 0;
+}
+
+input {
+  width: 100%;
+  padding: 13px;
+  border: 1px solid rgba(215, 113, 255, 0.25);
+  background: rgba(255, 255, 255, 0.08);
+  color: white;
+  outline: none;
+}
+
+.prefix-list {
+  margin-top: 10px;
+  border: 1px solid rgba(215, 113, 255, 0.14);
+  border-radius: 7px;
+  overflow: hidden;
+}
+
+.prefix-list div {
+  padding: 13px;
+  background: rgba(0, 0, 0, 0.16);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.actions-panel {
+  padding-bottom: 18px;
+}
+
+.actions-panel h3 {
+  padding: 20px 18px 8px;
+}
+
+table {
+  width: calc(100% - 36px);
+  margin: 0 18px;
+  border-collapse: collapse;
+  color: #f8eaff;
+}
+
+th,
+td {
+  padding: 14px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  text-align: left;
+}
+
+th {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+td {
+  background: rgba(0, 0, 0, 0.14);
+}
+
+.module-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  padding: 0 24px 28px;
+}
+
+.module-card {
+  padding: 22px;
+  min-height: 145px;
+}
+
+.module-card h3 {
+  color: #efb4ff;
+  margin: 0 0 10px;
+}
+
+.module-card p {
+  color: #d8c1e7;
+  line-height: 1.5;
+}
+
+@media (max-width: 1100px) {
+  .layout,
+  .module-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 850px) {
+  body {
+    display: block;
+  }
+
+  .sidebar {
+    width: 100%;
+    min-height: auto;
+  }
+
+  .topbar,
+  .left,
+  .right {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
