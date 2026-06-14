@@ -10,7 +10,7 @@
 
 <div class="page-glow"></div>
 
-<!-- ================= SIDEBAR ================= -->
+<!-- SIDEBAR -->
 <div class="sidebar">
 
   <div class="brand">
@@ -23,115 +23,66 @@
 
   <div class="nav">
     <h4>MAIN</h4>
-
     <a class="active" data-page="Bot Settings">Bot Settings</a>
     <a data-page="Embeds">Embeds</a>
     <a data-page="Moderation">Moderation</a>
-    <a data-page="Greetings">Greetings</a>
-
   </div>
 
 </div>
 
-<!-- ================= DASHBOARD ================= -->
+<!-- DASHBOARD -->
 <div class="dashboard">
 
-  <!-- TOP BAR -->
   <div class="topbar">
-    <div class="left">
-      <h2 id="pageTitle">Bot Settings</h2>
-    </div>
-
-    <div class="right">
-      <button class="save-btn">Save Changes</button>
-    </div>
+    <h2 id="pageTitle">Bot Settings</h2>
+    <button class="save-btn">Save</button>
   </div>
 
-  <!-- NOTICE -->
   <div class="notice">
-    <span>NEW</span> Streak Dashboard is live (beta)
+    Streak Dashboard (Beta)
   </div>
 
-  <!-- ================= PAGES ================= -->
+  <!-- PAGES -->
 
-  <!-- BOT SETTINGS -->
   <div class="page active" id="bot-settings">
-
     <div class="panel">
       <div class="panel-title">Bot Settings</div>
-
       <div class="setting-block">
         <h3>Bot Name</h3>
-        <input placeholder="Enter bot name">
+        <input placeholder="Bot Name">
 
         <h3>Prefix</h3>
-        <input placeholder="! / ? / .">
+        <input placeholder="!">
 
         <h3>Status</h3>
-        <input placeholder="Bot status message">
+        <input placeholder="Watching Streak Dashboard">
       </div>
-
     </div>
-
   </div>
 
-  <!-- EMBEDS -->
   <div class="page" id="embeds">
-
     <div class="panel">
-      <div class="panel-title">Embed Builder</div>
-
+      <div class="panel-title">Embeds</div>
       <div class="setting-block">
-        <h3>Title</h3>
-        <input placeholder="Embed title">
-
-        <h3>Description</h3>
-        <input placeholder="Embed description">
-
+        <input placeholder="Title">
+        <input placeholder="Description">
         <button>Create Embed</button>
       </div>
-
     </div>
-
   </div>
 
-  <!-- MODERATION -->
   <div class="page" id="moderation">
-
     <div class="panel">
-      <div class="panel-title">Moderation Tools</div>
-
+      <div class="panel-title">Moderation</div>
       <div class="setting-block">
-        <button>Kick User</button>
-        <button>Ban User</button>
-        <button>Timeout User</button>
+        <button>Kick</button>
+        <button>Ban</button>
       </div>
-
     </div>
-
-  </div>
-
-  <!-- GREETINGS -->
-  <div class="page" id="greetings">
-
-    <div class="panel">
-      <div class="panel-title">Welcome System</div>
-
-      <div class="setting-block">
-        <h3>Welcome Message</h3>
-        <input placeholder="Welcome {user} to the server!">
-
-        <button>Save Message</button>
-      </div>
-
-    </div>
-
   </div>
 
 </div>
 
-<!-- ================= SCRIPT ================= -->
 <script src="script.js"></script>
-
 </body>
 </html>
