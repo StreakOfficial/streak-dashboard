@@ -1,180 +1,137 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+  <meta charset="UTF-8">
   <title>Streak Dashboard</title>
-
-  <link rel="icon" type="image/png" href="favicon.png" />
-  <link rel="apple-touch-icon" href="favicon.png" />
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-  <div class="page-glow"></div>
 
-  <aside class="sidebar">
-    <div class="brand">
-      <img src="logo.png" class="brand-logo" alt="Streak Logo" />
-      <div>
-        <h1>STREAK</h1>
-        <p>Dashboard</p>
-      </div>
+<div class="page-glow"></div>
+
+<!-- ================= SIDEBAR ================= -->
+<div class="sidebar">
+
+  <div class="brand">
+    <img src="logo.png" class="brand-logo">
+    <div>
+      <h1>STREAK</h1>
+      <p>Dashboard</p>
+    </div>
+  </div>
+
+  <div class="nav">
+    <h4>MAIN</h4>
+
+    <a class="active" data-page="Bot Settings">Bot Settings</a>
+    <a data-page="Embeds">Embeds</a>
+    <a data-page="Moderation">Moderation</a>
+    <a data-page="Greetings">Greetings</a>
+
+  </div>
+
+</div>
+
+<!-- ================= DASHBOARD ================= -->
+<div class="dashboard">
+
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <div class="left">
+      <h2 id="pageTitle">Bot Settings</h2>
     </div>
 
-    <nav class="nav">
-      <h4>SETTINGS</h4>
-      <a class="active" data-page="Bot Settings">⚙️ Bot Settings</a>
-      <a data-page="Commands">⌨️ Commands</a>
-      <a data-page="Weblogs">🔗 Weblogs</a>
+    <div class="right">
+      <button class="save-btn">Save Changes</button>
+    </div>
+  </div>
 
-      <h4>SERVER DISCOVERY</h4>
-      <a data-page="Server Discovery">🌐 Server Discovery</a>
+  <!-- NOTICE -->
+  <div class="notice">
+    <span>NEW</span> Streak Dashboard is live (beta)
+  </div>
 
-      <h4>MODERATION</h4>
-      <a data-page="Automod">🛡️ Automod</a>
-      <a data-page="Moderation">🔨 Moderation</a>
-      <a data-page="Logging">📋 Logging</a>
+  <!-- ================= PAGES ================= -->
 
-      <h4>ROLES</h4>
-      <a data-page="Reaction Roles">⭐ Reaction Roles</a>
-      <a data-page="Autoroles">👥 Autoroles</a>
+  <!-- BOT SETTINGS -->
+  <div class="page active" id="bot-settings">
 
-      <h4>CUSTOM COMMANDS</h4>
-      <a data-page="Custom Commands">➕ Custom Commands</a>
-      <a data-page="Tags">💬 Tags</a>
+    <div class="panel">
+      <div class="panel-title">Bot Settings</div>
 
-      <h4>NOTIFICATIONS</h4>
-      <a data-page="Twitch Alerts">🎮 Twitch</a>
-      <a data-page="YouTube Alerts">▶️ YouTube</a>
-      <a data-page="Social Alerts">📢 Social Alerts</a>
+      <div class="setting-block">
+        <h3>Bot Name</h3>
+        <input placeholder="Enter bot name">
 
-      <h4>UTILITY</h4>
-      <a data-page="Greetings">👋 Greetings</a>
-      <a data-page="Starboard">⭐ Starboard</a>
-      <a data-page="Embeds">🖼️ Embeds</a>
-      <a data-page="Suggestions">💡 Suggestions</a>
-    </nav>
-  </aside>
+        <h3>Prefix</h3>
+        <input placeholder="! / ? / .">
 
-  <main class="dashboard">
-    <header class="topbar">
-      <div class="left">
-        <button class="menu-btn">☰</button>
-        <div>
-          <h2 id="pageTitle">Bot Settings</h2>
-          <p>Configure Streak for your Discord server.</p>
-        </div>
+        <h3>Status</h3>
+        <input placeholder="Bot status message">
       </div>
 
-      <div class="right">
-        <button class="server-select">Streak Official ▾</button>
-        <button class="discord-btn">Login with Discord</button>
-      </div>
-    </header>
+    </div>
 
-    <section class="notice">
-      <span>New</span>
-      Streak Dashboard is currently in development. Preview layout only.
-    </section>
+  </div>
 
-    <section class="layout">
-      <div class="panel main-panel">
-        <div class="panel-title">⚙️ Bot Settings</div>
+  <!-- EMBEDS -->
+  <div class="page" id="embeds">
 
-        <div class="setting-block">
-          <h3>Nickname</h3>
-          <p>Set the bot's display name in the server.</p>
-          <div class="input-row">
-            <input value="Streak Bot" />
-            <button>Apply</button>
-          </div>
-        </div>
+    <div class="panel">
+      <div class="panel-title">Embed Builder</div>
 
-        <div class="setting-block">
-          <h3>Custom Prefix</h3>
-          <p>Set one or more prefixes for commands.</p>
-          <div class="input-row">
-            <input value="!" />
-            <button>Add</button>
-          </div>
+      <div class="setting-block">
+        <h3>Title</h3>
+        <input placeholder="Embed title">
 
-          <div class="prefix-list">
-            <div>?</div>
-            <div>!</div>
-          </div>
-        </div>
+        <h3>Description</h3>
+        <input placeholder="Embed description">
 
-        <div class="setting-block">
-          <h3>Streak Premium</h3>
-          <p>Not active. Premium features will appear here later.</p>
-        </div>
+        <button>Create Embed</button>
       </div>
 
-      <div class="panel actions-panel">
-        <div class="panel-title">☰ Last actions</div>
+    </div>
 
-        <h3>Recent actions</h3>
+  </div>
 
-        <table>
-          <thead>
-            <tr>
-              <th>Executed</th>
-              <th>Username</th>
-              <th>Action</th>
-            </tr>
-          </thead>
+  <!-- MODERATION -->
+  <div class="page" id="moderation">
 
-          <tbody>
-            <tr>
-              <td>Today</td>
-              <td>admin</td>
-              <td>embed.post</td>
-            </tr>
-            <tr>
-              <td>Today</td>
-              <td>admin</td>
-              <td>greetings.update</td>
-            </tr>
-            <tr>
-              <td>Yesterday</td>
-              <td>mod</td>
-              <td>automod.edit</td>
-            </tr>
-            <tr>
-              <td>Yesterday</td>
-              <td>admin</td>
-              <td>reaction-role.create</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
+    <div class="panel">
+      <div class="panel-title">Moderation Tools</div>
 
-    <section class="module-grid">
-      <div class="module-card">
-        <h3>Greetings</h3>
-        <p>Welcome and goodbye messages for your members.</p>
+      <div class="setting-block">
+        <button>Kick User</button>
+        <button>Ban User</button>
+        <button>Timeout User</button>
       </div>
 
-      <div class="module-card">
-        <h3>Embeds</h3>
-        <p>Create purple Streak-style embeds for announcements.</p>
+    </div>
+
+  </div>
+
+  <!-- GREETINGS -->
+  <div class="page" id="greetings">
+
+    <div class="panel">
+      <div class="panel-title">Welcome System</div>
+
+      <div class="setting-block">
+        <h3>Welcome Message</h3>
+        <input placeholder="Welcome {user} to the server!">
+
+        <button>Save Message</button>
       </div>
 
-      <div class="module-card">
-        <h3>Moderation</h3>
-        <p>Kick, ban, mute, warn, and protect your server.</p>
-      </div>
+    </div>
 
-      <div class="module-card">
-        <h3>Suggestions</h3>
-        <p>Let members submit and vote on ideas.</p>
-      </div>
-    </section>
-  </main>
+  </div>
 
-  <script src="script.js"></script>
+</div>
+
+<!-- ================= SCRIPT ================= -->
+<script src="script.js"></script>
+
 </body>
 </html>
