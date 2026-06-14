@@ -1,40 +1,45 @@
-const API = "https://streak-bot-9vnn.onrender.com/api/settings";
+const API = "https://streak-bot-9vnn.onrender.com/api/embed";
 
-// LOAD
-async function load() {
+/* =========================
+   EMBED SENDER SYSTEM
+========================= */
+
+async function sendEmbed() {
+  const title = document.querySelector("#title")?.value;
+  const description = document.querySelector("#description")?.value;
+  const channel = document.querySelector("#channel")?.value;
+
+  if (!title || !description || !channel) {
+    alert("Please fill in all fields");
+    return;
+  }
+
   try {
-    const res = await fetch(API);
-    const data = await res.json();
+    await fetch(API, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        title,
+        description,
+        channel
+      })
+    });
 
-    const inputs = document.querySelectorAll("input");
-
-    if (data.botName) inputs[0].value = data.botName;
-    if (data.prefix) inputs[1].value = data.prefix;
-    if (data.status) inputs[2].value = data.status;
-
+    alert("Embed sent to bot!");
   } catch (err) {
     console.log(err);
+    alert("Failed to send embed");
   }
 }
 
-// SAVE
-async function save() {
-  const inputs = document.querySelectorAll("input");
+/* =========================
+   BUTTON CONNECTION
+========================= */
 
-  await fetch(API, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      botName: inputs[0]?.value,
-      prefix: inputs[1]?.value,
-      status: inputs[2]?.value
-    })
-  });
+document.addEventListener("DOMContentLoaded", () => {
+  const btn = document.querySelector(".send-embed");
 
-  alert("Saved!");
-}
-
-// BUTTON
-document.querySelector(".save-btn")?.addEventListener("click", save);
-
-load();
+  if (btn) {
+    btn.addEventListener("click", sendEmbed);
+  }
+});
