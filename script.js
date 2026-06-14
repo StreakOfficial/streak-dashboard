@@ -1,57 +1,42 @@
-const API = "https://streak-bot-9vnn.onrender.com/api/embed";
-const CHANNEL_API = "https://streak-bot-9vnn.onrender.com/api/channels";
+const content = document.getElementById("content");
+const pageTitle = document.getElementById("pageTitle");
 
 /* =========================
-   LOAD CHANNELS DROPDOWN
+   DROPDOWN TOGGLE
 ========================= */
-async function loadChannels() {
+document.querySelectorAll(".dropdown").forEach(drop => {
+  drop.addEventListener("click", () => {
+    drop.classList.toggle("active");
+  });
+});
+
+/* =========================
+   LOAD VIEW FILES
+========================= */
+async function loadPage(page) {
   try {
-    const res = await fetch(CHANNEL_API);
-    const channels = await res.json();
+    const res = await fetch(`views/${page}.html`);
+    const html = await res.text();
 
-    const select = document.querySelector("#channelSelect");
-    if (!select) return;
+    content.innerHTML = html;
+    pageTitle.textContent = page.replace(/-/g, " ");
 
-    select.innerHTML = "";
-
-    channels.forEach(ch => {
-      const option = document.createElement("option");
-      option.value = ch.id;
-      option.textContent = `# ${ch.name}`;
-      select.appendChild(option);
-    });
   } catch (err) {
-    console.log(err);
+    content.innerHTML = "<h2>Page not found</h2>";
   }
 }
 
 /* =========================
-   SEND EMBED
+   SIDEBAR NAV CLICK
 ========================= */
-async function sendEmbed() {
-  const title = document.querySelector("#title").value;
-  const description = document.querySelector("#description").value;
-  const channel = document.querySelector("#channelSelect").value;
-
-  await fetch(API, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      title,
-      description,
-      channel
-    })
+document.querySelectorAll("[data-page]").forEach(link => {
+  link.addEventListener("click", () => {
+    const page = link.getAttribute("data-page");
+    loadPage(page);
   });
-
-  alert("Embed sent!");
-}
+});
 
 /* =========================
-   INIT
+   DEFAULT PAGE
 ========================= */
-document.addEventListener("DOMContentLoaded", () => {
-  loadChannels();
-
-  const btn = document.querySelector(".send-embed");
-  if (btn) btn.addEventListener("click", sendEmbed);
-});
+loadPage("bot-settings");
