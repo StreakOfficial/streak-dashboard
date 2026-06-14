@@ -1,45 +1,57 @@
 const API = "https://streak-bot-9vnn.onrender.com/api/embed";
+const CHANNEL_API = "https://streak-bot-9vnn.onrender.com/api/channels";
 
 /* =========================
-   EMBED SENDER SYSTEM
+   LOAD CHANNELS DROPDOWN
 ========================= */
-
-async function sendEmbed() {
-  const title = document.querySelector("#title")?.value;
-  const description = document.querySelector("#description")?.value;
-  const channel = document.querySelector("#channel")?.value;
-
-  if (!title || !description || !channel) {
-    alert("Please fill in all fields");
-    return;
-  }
-
+async function loadChannels() {
   try {
-    await fetch(API, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        title,
-        description,
-        channel
-      })
-    });
+    const res = await fetch(CHANNEL_API);
+    const channels = await res.json();
 
-    alert("Embed sent to bot!");
+    const select = document.querySelector("#channelSelect");
+    if (!select) return;
+
+    select.innerHTML = "";
+
+    channels.forEach(ch => {
+      const option = document.createElement("option");
+      option.value = ch.id;
+      option.textContent = `# ${ch.name}`;
+      select.appendChild(option);
+    });
   } catch (err) {
     console.log(err);
-    alert("Failed to send embed");
   }
 }
 
 /* =========================
-   BUTTON CONNECTION
+   SEND EMBED
 ========================= */
+async function sendEmbed() {
+  const title = document.querySelector("#title").value;
+  const description = document.querySelector("#description").value;
+  const channel = document.querySelector("#channelSelect").value;
 
+  await fetch(API, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      title,
+      description,
+      channel
+    })
+  });
+
+  alert("Embed sent!");
+}
+
+/* =========================
+   INIT
+========================= */
 document.addEventListener("DOMContentLoaded", () => {
-  const btn = document.querySelector(".send-embed");
+  loadChannels();
 
-  if (btn) {
-    btn.addEventListener("click", sendEmbed);
-  }
+  const btn = document.querySelector(".send-embed");
+  if (btn) btn.addEventListener("click", sendEmbed);
 });
