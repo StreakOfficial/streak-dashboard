@@ -2,53 +2,53 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Arial;
 }
 
 body {
   display: flex;
   min-height: 100vh;
   background: #050008;
-  color: #fff;
-  overflow-x: hidden;
-}
-
-/* BACKGROUND */
-.page-glow {
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  background: radial-gradient(circle at 30% 20%, rgba(160,70,255,0.25), transparent 40%);
+  color: white;
 }
 
 /* SIDEBAR */
 .sidebar {
   width: 260px;
-  background: rgba(20,20,30,0.9);
+  background: rgba(20,20,30,0.95);
   padding: 20px;
 }
 
-.brand-logo {
-  width: 50px;
-  animation: float 3s ease-in-out infinite;
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
-@keyframes float {
-  0%,100% { transform: translateY(0); }
-  50% { transform: translateY(-6px); }
+.brand-logo {
+  width: 40px;
 }
 
 /* NAV */
 .nav a {
   display: block;
   padding: 10px;
-  color: white;
   cursor: pointer;
   border-radius: 6px;
 }
 
-.nav a.active {
+.nav a:hover {
   background: rgba(160,70,255,0.3);
+}
+
+/* SUB MENU */
+.sub {
+  margin-left: 10px;
+  display: none;
+}
+
+.dropdown.active + .sub {
+  display: block;
 }
 
 /* DASHBOARD */
@@ -59,26 +59,13 @@ body {
 
 /* TOPBAR */
 .topbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  padding: 15px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
 }
 
-/* NOTICE */
-.notice {
-  margin: 15px 0;
-  padding: 10px;
-  background: linear-gradient(90deg, purple, violet);
-  border-radius: 8px;
-}
-
-/* PAGES */
-.page {
-  display: none;
-}
-
-.page.active {
-  display: block;
+/* CONTENT */
+#content {
+  padding: 20px;
 }
 
 /* PANELS */
@@ -89,55 +76,19 @@ body {
   margin-top: 15px;
 }
 
-/* INPUTS */
-input {
+input, select {
   width: 100%;
   padding: 10px;
   margin: 8px 0;
-  border-radius: 6px;
-  border: none;
   background: rgba(255,255,255,0.1);
+  border: none;
   color: white;
 }
 
-/* BUTTONS */
 button {
-  padding: 10px 15px;
-  border: none;
-  border-radius: 6px;
+  padding: 10px;
   background: purple;
+  border: none;
   color: white;
   cursor: pointer;
-}
-
-/* FIXES (kept messy like you wanted) */
-.dashboard {
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-}
-
-.topbar {
-  padding: 16px 20px;
-}
-
-.notice {
-  margin: 16px 20px;
-}
-
-.page {
-  padding: 20px;
-}
-
-.panel {
-  margin-bottom: 16px;
-}
-
-.page.active {
-  animation: fadeIn 0.2s ease;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(5px); }
-  to { opacity: 1; transform: translateY(0); }
 }
