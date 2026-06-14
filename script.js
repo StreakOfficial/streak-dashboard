@@ -4,7 +4,9 @@ const title = document.getElementById("pageTitle");
 
 const API = "https://streak-bot-9vnn.onrender.com/api/settings";
 
-/* ---------------- LOAD SETTINGS ---------------- */
+/* =========================
+   LOAD SETTINGS
+========================= */
 async function loadSettings() {
   try {
     const res = await fetch(API);
@@ -12,55 +14,80 @@ async function loadSettings() {
 
     const inputs = document.querySelectorAll("input");
 
-    if (data.botName) inputs[0].value = data.botName;
-    if (data.prefix) inputs[1].value = data.prefix;
-    if (data.status) inputs[2].value = data.status;
+    if (inputs[0]) inputs[0].value = data.botName || "";
+    if (inputs[1]) inputs[1].value = data.prefix || "";
+    if (inputs[2]) inputs[2].value = data.status || "";
 
   } catch (err) {
     console.log("Load error:", err);
   }
 }
 
-/* ---------------- SAVE SETTINGS ---------------- */
+/* =========================
+   SAVE SETTINGS
+========================= */
 async function saveSettings() {
-  const inputs = document.querySelectorAll("input");
+  try {
+    const inputs = document.querySelectorAll("input");
 
-  await fetch(API, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      botName: inputs[0]?.value,
-      prefix: inputs[1]?.value,
-      status: inputs[2]?.value
-    })
-  });
+    await fetch(API, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        botName: inputs[0]?.value || "",
+        prefix: inputs[1]?.value || "",
+        status: inputs[2]?.value || ""
+      })
+    });
 
-  alert("Saved!");
+    alert("Saved successfully!");
+  } catch (err) {
+    console.log("Save error:", err);
+    alert("Failed to save");
+  }
 }
 
-/* ---------------- CARL.GG NAV ---------------- */
+/* =========================
+   CARL.GG PAGE SYSTEM
+========================= */
+function switchPage(pageName) {
+
+  // update sidebar active state
+  links.forEach(link => {
+    link.classList.toggle("active", link.dataset.page === pageName);
+  });
+
+  // hide all pages
+  pages.forEach(page => page.classList.remove("active"));
+
+  // find correct page
+  const target = document.getElementById(
+    pageName.toLowerCase().replace(/ /g, "-")
+  );
+
+  if (target) target.classList.add("active");
+
+  // update title
+  if (title) title.textContent = pageName;
+}
+
+/* =========================
+   EVENT LISTENERS
+========================= */
 links.forEach(link => {
   link.addEventListener("click", () => {
-
-    links.forEach(l => l.classList.remove("active"));
-    link.classList.add("active");
-
-    const pageName = link.dataset.page;
-
-    pages.forEach(p => p.classList.remove("active"));
-
-    const target = document.getElementById(
-      pageName.toLowerCase().replace(/ /g, "-")
-    );
-
-    if (target) target.classList.add("active");
-
-    if (title) title.textContent = pageName;
+    switchPage(link.dataset.page);
   });
 });
 
-/* ---------------- INIT ---------------- */
+/* =========================
+   INIT
+========================= */
 document.addEventListener("DOMContentLoaded", () => {
+
+  // save button
   document.querySelector(".save-btn")?.addEventListener("click", saveSettings);
+
+  // load dashboard data
   loadSettings();
 });
