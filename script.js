@@ -1,11 +1,37 @@
-const links = document.querySelectorAll(".nav a");
-const pageTitle = document.getElementById("pageTitle");
+const API = "http://localhost:3000/api/settings";
 
-links.forEach(link => {
-  link.addEventListener("click", () => {
-    links.forEach(item => item.classList.remove("active"));
-    link.classList.add("active");
+// Load saved settings when page opens
+async function loadSettings() {
+  const res = await fetch(API);
+  const data = await res.json();
 
-    pageTitle.textContent = link.dataset.page;
+  if (data.prefix) {
+    document.querySelectorAll("input")[1].value = data.prefix;
+  }
+
+  if (data.botName) {
+    document.querySelectorAll("input")[0].value = data.botName;
+  }
+}
+
+// Save settings
+async function saveSettings() {
+  const botName = document.querySelectorAll("input")[0].value;
+  const prefix = document.querySelectorAll("input")[1].value;
+
+  await fetch(API, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      botName,
+      prefix
+    })
   });
-});
+
+  alert("Saved to server!");
+}
+
+// Hook button
+document.querySelector("button").onclick = saveSettings;
+
+loadSettings();
