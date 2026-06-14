@@ -57,12 +57,14 @@ body {
   padding: 20px;
 }
 
+/* TOPBAR */
 .topbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
+/* NOTICE */
 .notice {
   margin: 15px 0;
   padding: 10px;
@@ -87,6 +89,7 @@ body {
   margin-top: 15px;
 }
 
+/* INPUTS */
 input {
   width: 100%;
   padding: 10px;
@@ -97,6 +100,7 @@ input {
   color: white;
 }
 
+/* BUTTONS */
 button {
   padding: 10px 15px;
   border: none;
@@ -104,4 +108,36 @@ button {
   background: purple;
   color: white;
   cursor: pointer;
+}
+
+/* FIXES (kept messy like you wanted) */
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.topbar {
+  padding: 16px 20px;
+}
+
+.notice {
+  margin: 16px 20px;
+}
+
+.page {
+  padding: 20px;
+}
+
+.panel {
+  margin-bottom: 16px;
+}
+
+.page.active {
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
 }
